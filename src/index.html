@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>Pixel Art Creator</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icon-512x512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="assets/icon-512x512.png" alt="Logo">
+    </div>
+    <div id="menu">
+      <button id="file">File</button>
+      <button id="edit">Edit</button>
+      <button id="help">Help</button>
+      <button id="theme-toggle">
+        <img src="assets/moon.png" alt="Switch theme">
+      </button>
+    </div>
+  </header>
+
+  <div id="main-menu" class="section expanded">
+    <button id=new-project class="button primary-button">NewProject
+    </button>
+    <button id="open-file" class="button secondary-button">Open file</button>
+  </div>
+  
+  <div id="edit-menu" class="section collapsed">
+    <p>Edit menu options (to do)</p>
+  </div>
+  
+  <div id="help-menu" class="section collapsed">
+    <p>Help menu information (to do)</p>
+    <br></br><div></div>
+    <p>Pixel Art Creator © 2025 Imię Nazwisko</p>
+  </div>
+
+  <!-- Strefa rysowania -->
+  <div id="draw" class="section">
+    <p>Drawing area (to do)</p>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
