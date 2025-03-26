@@ -1,6 +1,6 @@
 {
-	"name": "PixelArt Maker",
-	"short_name": "PixelArt",
+	"name": "PixelR",
+	"short_name": "PixelR",
 	"description": "Create pixelarts easy on your device!",
 	"start_url": "/pixelr/index.html",
 	"display": "standalone",
