@@ -2,7 +2,7 @@
 	"name": "PixelArt Maker",
 	"short_name": "PixelArt",
 	"description": "Create pixelarts easy on your device!",
-	"start_url": "/index.html",
+	"start_url": "/pixelr/index.html",
 	"display": "standalone",
 	"background_color": "#121212",
 	"theme_color": "#333333",
