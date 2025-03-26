@@ -1,7 +1,12 @@
 if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
+		let swPath = `${window.location.pathname.replace(
+			/index.html$/,
+			""
+		)}serviceWorker.js`;
+
 		navigator.serviceWorker
-			.register("/serviceWorker.js")
+			.register(swPath)
 			.then((registration) => {
 				console.log(
 					"Service Worker registered with scope:",

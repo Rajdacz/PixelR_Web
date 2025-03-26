@@ -1,16 +1,17 @@
 self.addEventListener("install", (event) => {
-	/*
-    event.waitUntil(
-        caches.open('v1').then(cache => {
-            return cache.addAll([
-                '/',
-                '/index.html' ,
-                '/style.css' ,
-                '/script.js' ,
-                '/manifest.json',
-            ]);
-        })
-    );*/
+	let basePath = self.location.pathname.replace(/serviceWorker.js$/, "");
+
+	event.waitUntil(
+		caches.open("v1").then((cache) => {
+			return cache.addAll([
+				basePath,
+				basePath + "index.html",
+				basePath + "style.css",
+				basePath + "script.js",
+				basePath + "manifest.json",
+			]);
+		})
+	);
 });
 
 self.addEventListener("fetch", (event) => {
