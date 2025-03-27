@@ -41,7 +41,7 @@ document
 document.getElementById("logo").addEventListener("click", () => toggleMenu(""));
 
 function setDarkTheme() {
-	document.querySelector("#theme-toggle img").src = "assets/sun.png";
+	document.querySelector("#theme-toggle img").src = "assets/moon.png";
 	document.documentElement.style.setProperty(
 		"--bg-color",
 		"var(--dark-bg-primary)"
@@ -69,7 +69,7 @@ function setDarkTheme() {
 }
 
 function setLightTheme() {
-	document.querySelector("#theme-toggle img").src = "assets/moon.png";
+	document.querySelector("#theme-toggle img").src = "assets/sun.png";
 	document.documentElement.style.setProperty(
 		"--bg-color",
 		"var(--light-bg-primary)"
@@ -108,9 +108,9 @@ function updateThemeIcon() {
 			.getPropertyValue("--dark-bg-primary")
 			.trim()
 	) {
-		themeIcon.src = "assets/sun.png";
-	} else {
 		themeIcon.src = "assets/moon.png";
+	} else {
+		themeIcon.src = "assets/sun.png";
 	}
 }
 
