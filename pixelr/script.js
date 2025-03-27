@@ -1,19 +1,24 @@
+import { show } from "./canvas.js";
+
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    let swPath = `${window.location.pathname.replace(
-      /index.html$/,
-      ""
-    )}serviceWorker.js`;
-    
-    navigator.serviceWorker
-      .register(swPath)
-      .then((registration) => {
-        console.log("Service Worker registered with scope:", registration.scope);
-      })
-      .catch((error) => {
-        console.log("Service Worker registration failed:", error);
-      });
-  });
+	window.addEventListener("load", () => {
+		let swPath = `${window.location.pathname.replace(
+			/index.html$/,
+			""
+		)}serviceWorker.js`;
+
+		navigator.serviceWorker
+			.register(swPath)
+			.then((registration) => {
+				console.log(
+					"Service Worker registered with scope:",
+					registration.scope
+				);
+			})
+			.catch((error) => {
+				console.log("Service Worker registration failed:", error);
+			});
+	});
 }
 
 function toggleMenu(targetId) {
@@ -40,7 +45,6 @@ document
 	.addEventListener("click", () => toggleMenu("help-menu"));
 document.getElementById("logo").addEventListener("click", () => toggleMenu(""));
 
-
 // Themes
 
 function setDarkTheme() {
@@ -61,6 +65,7 @@ function setDarkTheme() {
 		"--text-secondary-color",
 		"var(--dark-text-secondary)"
 	);
+	document.documentElement.style.setProperty("--shadow", "var(--dark-shadow)");
 	document.documentElement.style.setProperty(
 		"--primary-button-color",
 		"var(--primary-500)"
@@ -89,6 +94,7 @@ function setLightTheme() {
 		"--text-secondary-color",
 		"var(--light-text-secondary)"
 	);
+	document.documentElement.style.setProperty("--shadow", "var(--light-shadow)");
 	document.documentElement.style.setProperty(
 		"--primary-button-color",
 		"var(--primary-500)"
@@ -139,3 +145,33 @@ themeToggleButton.addEventListener("click", () => {
 updateThemeIcon();
 
 // -- Theme
+
+function showModal(content) {
+	const modal = document.getElementById("modal");
+
+	modal.firstChild.innerHTML = content;
+
+	modal.classList.add("shown");
+	modal.classList.remove("hidden");
+}
+
+function hideModal() {
+	const modal = document.getElementById("modal");
+
+	modal.classList.add("hidden");
+	modal.classList.remove("shown");
+}
+
+document.getElementById("modal").addEventListener("click", () => {
+	hideModal();
+});
+
+document.getElementById("modal-content").addEventListener("click", (event) => {
+	event.stopPropagation();
+});
+
+document.getElementById("new-project").addEventListener("click", () => {
+	showModal(
+		'<button id="modal-submit" class="button primary-button">OK</button><button id="modal-close" class="button secondary-button">Cencel</button><h3>Project name</h3><input class="input" id="modal-input" />'
+	);
+});
