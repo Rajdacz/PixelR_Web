@@ -1,4 +1,4 @@
-if ("serviceWorker" in navigator) {
+/*if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		let swPath = `${window.location.pathname.replace(
 			/index.html$/,
@@ -17,7 +17,7 @@ if ("serviceWorker" in navigator) {
 				console.log("Service Worker registration failed:", error);
 			});
 	});
-}
+}*/
 
 function toggleMenu(targetId) {
 	const sections = document.querySelectorAll(".section");
