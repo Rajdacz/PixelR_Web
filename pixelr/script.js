@@ -40,6 +40,9 @@ document
 	.addEventListener("click", () => toggleMenu("help-menu"));
 document.getElementById("logo").addEventListener("click", () => toggleMenu(""));
 
+
+// Themes
+
 function setDarkTheme() {
 	document.querySelector("#theme-toggle img").src = "assets/moon.png";
 	document.documentElement.style.setProperty(
@@ -131,9 +134,8 @@ themeToggleButton.addEventListener("click", () => {
 	} else {
 		setDarkTheme();
 	}
-
-	document.body.style.transition =
-		"background-color 0.3s, color 0.3s, border-color 0.3s";
 });
 
 updateThemeIcon();
+
+// -- Theme
