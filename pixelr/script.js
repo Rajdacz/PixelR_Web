@@ -1,23 +1,20 @@
-/*if ("serviceWorker" in navigator) {
-	window.addEventListener("load", () => {
-		let swPath = `${window.location.pathname.replace(
-			/index.html$/,
-			""
-		)}serviceWorker.js`;
-
-		navigator.serviceWorker
-			.register(swPath)
-			.then((registration) => {
-				console.log(
-					"Service Worker registered with scope:",
-					registration.scope
-				);
-			})
-			.catch((error) => {
-				console.log("Service Worker registration failed:", error);
-			});
-	});
-}*/
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    let swPath = `${window.location.pathname.replace(
+      /index.html$/,
+      ""
+    )}serviceWorker.js`;
+    
+    navigator.serviceWorker
+      .register(swPath)
+      .then((registration) => {
+        console.log("Service Worker registered with scope:", registration.scope);
+      })
+      .catch((error) => {
+        console.log("Service Worker registration failed:", error);
+      });
+  });
+}
 
 function toggleMenu(targetId) {
 	const sections = document.querySelectorAll(".section");
