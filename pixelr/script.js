@@ -249,58 +249,94 @@ let newX = 0,
 	newY = 0,
 	startX = 0,
 	startY = 0;
-
-/*container.addEventListener("wheel", function (event) {
-	event.preventDefault();
-
-	const rect = canvas.getBoundingClientRect();
-	const mouseX = event.clientX - rect.left;
-	const mouseY = event.clientY - rect.top;
-
-	if (event.deltaY < 0) {
-		scale += 0.1;
-	} else {
-		scale -= 0.1;
-	}
-
-	scale = Math.min(Math.max(scale, 0.1), 3);
-
-	const originX = (mouseX / rect.width) * 100;
-	const originY = (mouseY / rect.height) * 100;
-
-	canvas.style.transformOrigin = `${originX}% ${originY}%`;
-	canvas.style.transform = `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`;
-});*/
+let scale = 1;
+let lastDist = 0;
 
 function startDrag(event) {
-	startX = event.clientX || event.touches[0].clientX;
-	startY = event.clientY || event.touches[0].clientY;
+	let clientX, clientY;
+
+	if (event.touches) {
+		clientX = event.touches[0].clientX;
+		clientY = event.touches[0].clientY;
+	} else {
+		clientX = event.clientX;
+		clientY = event.clientY;
+	}
+
+	startX = clientX;
+	startY = clientY;
 
 	document.addEventListener("mousemove", mousemove);
-	document.addEventListener("touchmove", mousemove); // Dodajemy touchmove
+	document.addEventListener("touchmove", mousemove);
 }
 
 function stopDrag() {
 	document.removeEventListener("mousemove", mousemove);
-	document.removeEventListener("touchmove", mousemove); // Dodajemy touchmove
+	document.removeEventListener("touchmove", mousemove);
 }
 
 function mousemove(event) {
-	newX = startX - (event.clientX || event.touches[0].clientX);
-	newY = startY - (event.clientY || event.touches[0].clientY);
+	let clientX, clientY;
 
-	startX = event.clientX || event.touches[0].clientX;
-	startY = event.clientY || event.touches[0].clientY;
+	if (event.touches) {
+		clientX = event.touches[0].clientX;
+		clientY = event.touches[0].clientY;
+	} else {
+		clientX = event.clientX;
+		clientY = event.clientY;
+	}
+
+	newX = startX - clientX;
+	newY = startY - clientY;
+
+	startX = clientX;
+	startY = clientY;
 
 	canvas.style.top = canvas.offsetTop - newY + "px";
 	canvas.style.left = canvas.offsetLeft - newX + "px";
 }
 
-// Dla urządzeń z myszką
+// Obsługa scrolla do zoomowania
+container.addEventListener("wheel", function (event) {
+	event.preventDefault();
+
+	let scaleAmount = event.deltaY < 0 ? 0.1 : -0.1;
+	scale = Math.min(Math.max(scale + scaleAmount, 0.1), 3);
+
+	canvas.style.transform = `scale(${scale})`;
+});
+
+// Obsługa pinch-to-zoom na dotyku
+container.addEventListener("touchmove", function (event) {
+	if (event.touches.length === 2) {
+		event.preventDefault();
+
+		let touch1 = event.touches[0];
+		let touch2 = event.touches[1];
+
+		let dist = Math.hypot(
+			touch2.clientX - touch1.clientX,
+			touch2.clientY - touch1.clientY
+		);
+
+		if (lastDist) {
+			let scaleAmount = (dist - lastDist) * 0.005;
+			scale = Math.min(Math.max(scale + scaleAmount, 0.1), 3);
+			canvas.style.transform = `scale(${scale})`;
+		}
+
+		lastDist = dist;
+	}
+});
+
+// Reset dystansu po zakończeniu dotyku
+container.addEventListener("touchend", function () {
+	lastDist = 0;
+});
+
 container.addEventListener("mousedown", startDrag);
 document.addEventListener("mouseup", stopDrag);
 
-// Dla urządzeń dotykowych
 container.addEventListener("touchstart", startDrag);
 document.addEventListener("touchend", stopDrag);
 
